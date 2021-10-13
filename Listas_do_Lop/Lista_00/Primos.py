@@ -30,3 +30,5 @@ if (numero_colocado >= 2) and (numero_colocado <= 200):
 
 else:
     print("valor de entrada invalido!")
+
+
