@@ -24,4 +24,4 @@ while abs(f(A,B,C,D,X0)) > 0.0001:
     if interacoes >= 100:
         break
 
-print(f'{X0:0.3f} {interacoes}')
+print(round(X0,3),interacoes)
