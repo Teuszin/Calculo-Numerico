@@ -42,6 +42,6 @@ if abs(df(A,B,C,newton)) < 1e-3:
         secante = (V * f(A,B,C,D,U) - U * f(A,B,C,D,V)) / (f(A,B,C,D,U) - f(A,B,C,D,V))
         
         
-    print(round(secante,3),interacoes)
+    print(round(secante,8),interacoes)
 else:
-    print(round(newton,3),0)
+    print(round(newton,8),0)

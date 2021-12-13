@@ -8,10 +8,10 @@ dom_linha = 0
 dom_col = 0
 dominante = 0
 teste = 0
+igual = 0
+valores = []
 
-
-
-# Montando a matriz com os valores de imputs:
+# Montando a matriz com os valores de inputs:
 
 for i in range (0,tamanho):
     for j in range (0, tamanho):
@@ -42,24 +42,37 @@ def dominancia(matriz,tamanho,dom_linha,dom_col,sominha):
     else:
         return False
 
+# caso a função retorne True, ela foi dominante por algum dos 2 lados, caso contrário ela irá pro else:
 
 if  dominancia(matriz,tamanho,dom_linha,dom_col,sominha):
-    print('É dominante')
+    print('a matriz possui dominancia.')
+
+# verificando se ela é dominavel trocando as linhas de posição:
 
 else:
-    while teste != 1:
-        for i in range (0,tamanho):
+    for i in range (0,tamanho):
             for j in range (0, tamanho):
-                matriz[[i, j]] = matriz[[j, i]]
-                for x in range (0,tamanho):
-                    for y in range (0, tamanho):
-                        matriz[[x, y]] = matriz[[y, x]]
-                        if  dominancia(matriz,tamanho,dom_linha,dom_col,sominha):
-                            print('É dominante')
-                            teste = 1
-                            print(f'{i} trocou por {j} primario')
-                            print(f'e {x} trocou por {y} secundario')
-                            break
-            
-            
-        
+                sominha += abs(matriz[i,j])           
+            for x in range (0,tamanho):
+                sominha += -abs(matriz[i,x])
+                if abs(matriz[i,x]) > sominha:
+                    valores.extend([i,x])
+                    
+# Se as Linhas trocadas forem iguais a elas mesmos, ex: (L1 por L1), duas vezes, é sinal que não vai certo                    
+                    if i == x:
+                        igual += 1
+                    if igual >= (tamanho/2):
+                        
+                        break
+                    break
+
+                else:
+                    sominha += abs(matriz[i,x])
+            sominha = 0
+
+    if igual >= (tamanho/2):
+        print('a matriz nao possui dominancia, mesmo se trocar linhas.')
+    else:
+        print('a matriz possui dominancia se trocar linhas:')
+        for y in range(0,int((len(valores))),2):
+            print(f'L{valores[y]} vai para L{valores[y+1]}')
